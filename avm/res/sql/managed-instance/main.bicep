@@ -253,7 +253,13 @@ resource managedInstance 'Microsoft.Sql/managedInstances@2023-08-01-preview' = {
       type: servicePrincipal
     }
     minimalTlsVersion: minimalTlsVersion
+    maintenanceConfigurationId: maintenanceWindow.id
   }
+}
+
+resource maintenanceWindow 'Microsoft.Maintenance/publicMaintenanceConfigurations@2023-04-01' existing = {
+  scope: subscription()
+  name: 'SQL_WestEurope_MI_1'
 }
 
 resource managedInstance_lock 'Microsoft.Authorization/locks@2020-05-01' = if (!empty(lock ?? {}) && lock.?kind != 'None') {
