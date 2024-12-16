@@ -6,7 +6,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.32.4.45862",
-      "templateHash": "14276659880472969020"
+      "templateHash": "13307408550364022886"
     },
     "name": "SQL Managed Instances",
     "description": "This module deploys a SQL Managed Instance.",
@@ -604,15 +604,8 @@
           "type": "[parameters('servicePrincipal')]"
         },
         "minimalTlsVersion": "[parameters('minimalTlsVersion')]",
-        "maintenanceConfigurationId": "[subscriptionResourceId('Microsoft.Maintenance/publicMaintenanceConfigurations', 'SQL_WestEurope_MI_1')]"
+        "maintenanceConfigurationId": "[resourceId('Microsoft.Maintenance/maintenanceConfigurations', 'maintconfig01')]"
       }
-    },
-    "maintenanceWindow": {
-      "existing": true,
-      "type": "Microsoft.Maintenance/publicMaintenanceConfigurations",
-      "apiVersion": "2023-04-01",
-      "subscriptionId": "[subscription().subscriptionId]",
-      "name": "SQL_WestEurope_MI_1"
     },
     "managedInstance_lock": {
       "condition": "[and(not(empty(coalesce(parameters('lock'), createObject()))), not(equals(tryGet(parameters('lock'), 'kind'), 'None')))]",
